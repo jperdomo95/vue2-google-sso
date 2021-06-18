@@ -2,45 +2,32 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
     <div class="flex-center">
-      <g-signin-button
-        :params="googleSignInParams"
-        @success="onSignInSuccess"
-        @error="onSignInError"
-      >
-        <span class="icon"></span>
-        <span>Sign in with Google</span>
-      </g-signin-button>
+      <GoogleLoginBtn
+        @onSignInSuccess="signInSuccess"
+        @onSignInError="signInError"
+      />
     </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
+import GoogleLoginBtn from '@/components/GoogleLoginBtn'
 
 export default {
   name: 'Home',
-  data () {
-    return {
-      googleSignInParams: {
-        client_id: process.env.VUE_APP_GOOGLE_CLIENT_ID
-      }
-    }
-  },
-  mounted () {
-    console.log(process.env.VUE_APP_GOOGLE_CLIENT_ID)
-  },
+  components: { GoogleLoginBtn },
   methods: {
-    onSignInSuccess (googleUser) {
+    signInSuccess (googleUser) {
       const profile = googleUser.getBasicProfile()
       console.log(profile.getId())
     },
-    onSignInError (error) {
+    signInError (error) {
       console.log(error)
     }
   }
 }
 </script>
-<style scoped>
+<style>
   .flex-center {
     display: flex;
     justify-content: center;
