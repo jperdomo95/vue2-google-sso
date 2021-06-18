@@ -1,12 +1,11 @@
 import Vue from 'vue'
+import GSignInButton from 'vue-google-signin-button'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import authInit from './auth'
 
 Vue.config.productionTip = false
-
-authInit()
+Vue.use(GSignInButton)
 
 new Vue({
   router,
